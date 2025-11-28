@@ -4,7 +4,7 @@ Backend para una plataforma de biblioteca donde usuarios pueden registrarse, aut
 
 ---
 
-## ✅ Stack
+## Stack
 - Node.js + Express
 - PostgreSQL
 - Docker / Docker Compose
@@ -13,7 +13,7 @@ Backend para una plataforma de biblioteca donde usuarios pueden registrarse, aut
 
 ---
 
-## 📁 Estructura del proyecto
+## Estructura del proyecto
 
 ```
 FinalBackend/
@@ -50,7 +50,7 @@ README.md
 
 ---
 
-## 🔐 Variables de entorno
+## Variables de entorno
 
 Por seguridad, este repositorio **NO incluye** `.env`.  
 Crea un archivo `.env` en la raíz (mismo nivel que `docker-compose.yml`) usando este ejemplo:
@@ -68,7 +68,7 @@ ADMIN_PASSWORD=Admin123
 
 ---
 
-## ▶️ Ejecutar con Docker (recomendado)
+## Ejecutar con Docker (recomendado)
 
 ### 1) Construir y levantar API + DB
 
@@ -116,7 +116,7 @@ El admin se crea con permisos:
 
 ---
 
-## ✅ Reglas de autenticación (según enunciado)
+## Reglas de autenticación (según enunciado)
 
 ### Endpoints públicos (sin autenticación)
 
@@ -135,39 +135,39 @@ Authorization: Bearer <TOKEN>
 
 ---
 
-## 🌐 Endpoints
+## Endpoints
 
 > Base URL local: `http://localhost:3000`
 
-### 🔑 Auth
+### Auth
 
 * `POST /api/auth/register`
 * `POST /api/auth/login`
 
-### 👤 Users
+### Users
 
-* `GET /api/users/me` 🔒
-* `GET /api/users/:id` 🔒 *(seguro: no expone password_hash)*
-* `PUT /api/users/:id` 🔒 (solo el mismo usuario o permiso `can_update_users`)
-* `DELETE /api/users/:id` 🔒 soft delete (solo el mismo usuario o permiso `can_delete_users`)
+* `GET /api/users/me` 
+* `GET /api/users/:id`  *(seguro: no expone password_hash)*
+* `PUT /api/users/:id`  (solo el mismo usuario o permiso `can_update_users`)
+* `DELETE /api/users/:id` soft delete (solo el mismo usuario o permiso `can_delete_users`)
 
 ### 📚 Books
 
-* `GET /api/books` ✅ (público, filtros + paginación, excluye inactivos por defecto)
-* `GET /api/books/:id` ✅ (público, retorna info completa del libro)
-* `POST /api/books` 🔒 + permiso `can_create_books`
-* `PUT /api/books/:id` 🔒 + permiso `can_update_books`
-* `DELETE /api/books/:id` 🔒 + permiso `can_delete_books` (soft delete)
+* `GET /api/books` (público, filtros + paginación, excluye inactivos por defecto)
+* `GET /api/books/:id` (público, retorna info completa del libro)
+* `POST /api/books`  + permiso `can_create_books`
+* `PUT /api/books/:id`  + permiso `can_update_books`
+* `DELETE /api/books/:id`  + permiso `can_delete_books` (soft delete)
 
-### 📌 Reservations
+###  Reservations
 
-* `POST /api/reservations` 🔒 (cualquier usuario autenticado puede reservar)
-* `GET /api/reservations/book/:bookId` 🔒 (historial por libro)
-* `GET /api/reservations/user/:userId` 🔒 (historial por usuario)
+* `POST /api/reservations`  (cualquier usuario autenticado puede reservar)
+* `GET /api/reservations/book/:bookId`  (historial por libro)
+* `GET /api/reservations/user/:userId`  (historial por usuario)
 
 ---
 
-## 🔎 Filtros + paginación (GET /api/books)
+##  Filtros + paginación (GET /api/books)
 
 Permite filtrar por cualquier combinación de:
 
@@ -195,7 +195,7 @@ Permite filtrar por cualquier combinación de:
 
 ---
 
-## 🧾 Soft Delete (seguridad)
+## Soft Delete (seguridad)
 
 * Usuarios y libros **no se eliminan físicamente**.
 * Se marca `is_active = false`.
@@ -204,7 +204,7 @@ Permite filtrar por cualquier combinación de:
 
 ---
 
-## 🧪 Pruebas (Jest + Supertest)
+##  Pruebas (Jest + Supertest)
 
 El enunciado solicita:
 
@@ -227,7 +227,7 @@ npm test
 
 ---
 
-## ✅ Guía de verificación en Postman (orden recomendado)
+##  Guía de verificación en Postman (orden recomendado)
 
 ### 1) Login admin (obtener token)
 
@@ -293,7 +293,7 @@ Body:
 ### 6) Validar permisos (user normal NO crea libro)
 
 **POST** `http://localhost:3000/api/books` con `TOKEN_USER`
-✅ esperado: `403 Forbidden`
+ esperado: `403 Forbidden`
 
 ### 7) Reservar libro (user normal)
 
@@ -323,22 +323,3 @@ Luego:
 * `GET /api/books/1` → `404`
 * `GET /api/books/1?includeInactive=true` → `200`
 
----
-
-## ✅ Checklist de rúbrica (resumen)
-
-* Estructura correcta del proyecto ✅
-* No expone secretos (`.env` no se sube) ✅
-* No incluye `node_modules` ✅
-* CREATE User ✅
-* CREATE Libro + Auth + Auth ID ✅
-* READ User (login) ✅
-* READ Libro (1) ✅
-* READ Libro (*) + filtros + paginación + excluye inactivos ✅
-* UPDATE User + Auth ✅
-* UPDATE Libro + Auth ✅
-* DELETE modelos + Soft Delete ✅
-* Historial reservas por libro y usuario ✅
-* Tests por controlador ✅
-
----
