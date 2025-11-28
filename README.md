@@ -95,7 +95,7 @@ docker compose up --build
 
 ---
 
-## 👤 Admin automático (Seed)
+##  Admin automático (Seed)
 
 Para que el profesor pueda probar endpoints con permisos (crear/editar/eliminar libros), el sistema crea automáticamente un **usuario admin** al iniciar la API (si no existe) usando:
 
@@ -151,7 +151,7 @@ Authorization: Bearer <TOKEN>
 * `PUT /api/users/:id`  (solo el mismo usuario o permiso `can_update_users`)
 * `DELETE /api/users/:id` soft delete (solo el mismo usuario o permiso `can_delete_users`)
 
-### 📚 Books
+###  Books
 
 * `GET /api/books` (público, filtros + paginación, excluye inactivos por defecto)
 * `GET /api/books/:id` (público, retorna info completa del libro)
